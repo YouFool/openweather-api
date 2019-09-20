@@ -35,7 +35,7 @@ public class CityService {
      * @return
      */
     public City createCity(String cityName, String countryCode) {
-        //TODO: validate here if city exists at all, we can do this via MongoDB
+        //TODO: validate here if city exists at all, we can do this via MongoDB query
 
         City cityToSave = new City(cityName, countryCode);
 
