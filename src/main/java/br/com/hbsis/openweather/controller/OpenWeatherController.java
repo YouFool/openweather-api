@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller responsible to OpenWeather API requests.
+ * Rest controller responsible to OpenWeather API requests.
  */
 @RestController
 @RequestMapping("/weather")
