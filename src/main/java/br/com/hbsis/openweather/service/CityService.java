@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +24,6 @@ public class CityService {
 
     @Autowired
     private OpenWeatherCityRepository openWeatherCityRepository;
-
-    @Autowired
-    private MongoImportService mongoImportService;
 
     /**
      * Finds and returns all cities.
@@ -44,21 +40,21 @@ public class CityService {
      *
      * @param cityName    the city name
      * @param countryCode the city country code
-     * @return
+     * @return the created {@link City}
+     * @throws ResponseStatusException if city does not exists
      */
     public City createCity(String cityName, String countryCode) {
-        //TODO: validate here if city exists at all, we can do this via MongoDB query
-        List<OpenWeatherCity> byNameAndCountry = this.openWeatherCityRepository.findByNameAndCountry(cityName, countryCode);
+        List<OpenWeatherCity> citiesByNameAndCountry = this.openWeatherCityRepository.findByNameAndCountry(cityName, countryCode);
 
-        if (CollectionUtils.isEmpty(byNameAndCountry)) {
-            try {
-                this.mongoImportService.importCitiesFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        OpenWeatherCity openWeatherCity = citiesByNameAndCountry.stream()
+                .findFirst()
+                .orElse(null);
+
+        if (CollectionUtils.isEmpty(citiesByNameAndCountry) || openWeatherCity == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "City does not exists!");
         }
 
-        City cityToSave = new City(cityName, countryCode, Long.valueOf(byNameAndCountry.get(0).getId()));
+        City cityToSave = new City(cityName, countryCode, Long.valueOf(openWeatherCity.getId()));
 
         return this.cityRepository.save(cityToSave);
     }

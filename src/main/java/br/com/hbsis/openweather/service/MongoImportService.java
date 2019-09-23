@@ -18,33 +18,24 @@ public class MongoImportService {
      * Imports cities in JSON file.
      */
     public void importCitiesFile() throws UnknownHostException, IOException {
-        int defaultConfigPort = 27017;
-        String defaultHost = "localhost";
         String database = "test";
         String collection = "city";
         File jsonFile = new File(Thread.currentThread().getContextClassLoader().getResource("static/city.list.json").getFile());
         String jsonPath = jsonFile.getAbsolutePath();
-        MongodProcess mongod = startMongod(defaultConfigPort);
+        MongodProcess mongod = startMongod();
 
 
         try {
-            MongoImportProcess mongoImport = startMongoImport(defaultHost, defaultConfigPort, database, collection, jsonPath, true, true, true);
-            try {
-                MongoClient mongoClient = new MongoClient(defaultHost, defaultConfigPort);
-                System.out.println("DB Names: " + mongoClient.getDatabaseNames());
-            } finally {
-                mongoImport.stop();
-            }
+            MongoImportProcess mongoImport = startMongoImport(database, collection, jsonPath, true, true, true);
         } finally {
             mongod.stop();
         }
     }
 
-    private MongoImportProcess startMongoImport(String bindIp, int port, String dbName, String collection, String jsonFile, Boolean jsonArray, Boolean upsert, Boolean drop)
+    private MongoImportProcess startMongoImport(String dbName, String collection, String jsonFile, Boolean jsonArray, Boolean upsert, Boolean drop)
             throws IOException {
         IMongoImportConfig mongoImportConfig = new MongoImportConfigBuilder()
                 .version(Version.Main.PRODUCTION)
-                .net(new Net(bindIp, port, Network.localhostIsIPv6()))
                 .db(dbName)
                 .collection(collection)
                 .upsert(upsert)
@@ -59,14 +50,13 @@ public class MongoImportService {
         return mongoImport;
     }
 
-    private MongodProcess startMongod(int defaultConfigPort) throws IOException {
+    private MongodProcess startMongod() throws IOException {
         IMongodConfig mongoConfigConfig = new MongodConfigBuilder()
                 .version(Version.Main.PRODUCTION)
-                .net(new Net(defaultConfigPort, Network.localhostIsIPv6()))
                 .build();
 
-
-        MongodExecutable mongodExecutable = MongodStarter.getDefaultInstance().prepare(mongoConfigConfig);
+        MongodStarter defaultInstance = MongodStarter.getDefaultInstance();
+        MongodExecutable mongodExecutable = defaultInstance.prepare(mongoConfigConfig);
         MongodProcess mongod = mongodExecutable.start();
         return mongod;
     }

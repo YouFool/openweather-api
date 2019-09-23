@@ -5,7 +5,6 @@ import br.com.hbsis.openweather.entity.City;
 import br.com.hbsis.openweather.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -39,10 +38,7 @@ public class CityController {
      */
     @PostMapping
     public City createCity(@RequestBody CityDTO city) {
-        final String capitalizedCityName = StringUtils.capitalize(city.getName().toLowerCase());
-        final String countryPrefix = city.getCountryCode();
-
-        return this.cityService.createCity(capitalizedCityName, countryPrefix);
+        return this.cityService.createCity(city.getName(), city.getCountryCode());
     }
 
     /**

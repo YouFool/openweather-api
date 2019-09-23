@@ -8,13 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Service responsible for the communication with the OpenWeather API.
@@ -35,11 +32,12 @@ public class OpenWeatherService {
     private CityConfiguration cityConfiguration;
 
     /**
-     * Creates all cities!!!! TODO: doc
+     * Reads a file containing all OpenWeather cities and saves all entities in MongoDB.
      */
     public void createAllCities() {
         List<OpenWeatherCity> openWeatherCities = this.cityConfiguration.readCities();
         this.openWeatherCityRepository.saveAll(openWeatherCities);
+        System.err.println("OpenWeather cities are now saved!");
     }
 
     /**
@@ -78,8 +76,8 @@ public class OpenWeatherService {
      */
     public Void getCityForecast(Long cityId) {
 
-//        RestTemplate weatherRestTemplate = new RestTemplate();
-//        weatherRestTemplate.getForObject("url", ForecastDTO.class, cityId);
+//        RestTemplate forecastRestTemplate = new RestTemplate();
+//        forecastRestTemplate.getForObject("url", ForecastDTO.class, cityId);
 
         return null;
     }
