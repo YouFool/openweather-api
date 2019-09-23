@@ -17,8 +17,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class City {
 
-    //TODO: validate if it's best to use a JPA entity or a HashMap
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "city_seq")
     @SequenceGenerator(name = "city_seq", sequenceName = "city_seq", allocationSize = 1, initialValue = 1)
@@ -32,14 +30,19 @@ public class City {
     @Size(max = 2)
     private String countryCode;
 
+    @Column(name = "open_weather_id")
+    private Long openWeatherId;
+
     /**
-     * Constructs a city with name and the country code.
+     * Constructs a city with name, country code and it's OpenWeather ID.
      *
-     * @param name        city name
-     * @param countryCode country code
+     * @param name          city name
+     * @param countryCode   country code
+     * @param openWeatherId city OpenWeather ID
      */
-    public City(@Size(max = 255) String name, @Size(max = 2) String countryCode) {
+    public City(@Size(max = 255) String name, @Size(max = 2) String countryCode, Long openWeatherId) {
         this.name = name;
         this.countryCode = countryCode;
+        this.openWeatherId = openWeatherId;
     }
 }

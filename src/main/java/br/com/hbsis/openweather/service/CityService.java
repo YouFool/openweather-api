@@ -1,10 +1,16 @@
 package br.com.hbsis.openweather.service;
 
 import br.com.hbsis.openweather.entity.City;
+import br.com.hbsis.openweather.entity.OpenWeatherCity;
 import br.com.hbsis.openweather.repository.CityRepository;
+import br.com.hbsis.openweather.repository.OpenWeatherCityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +22,12 @@ public class CityService {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private OpenWeatherCityRepository openWeatherCityRepository;
+
+    @Autowired
+    private MongoImportService mongoImportService;
 
     /**
      * Finds and returns all cities.
@@ -36,8 +48,17 @@ public class CityService {
      */
     public City createCity(String cityName, String countryCode) {
         //TODO: validate here if city exists at all, we can do this via MongoDB query
+        List<OpenWeatherCity> byNameAndCountry = this.openWeatherCityRepository.findByNameAndCountry(cityName, countryCode);
 
-        City cityToSave = new City(cityName, countryCode);
+        if (CollectionUtils.isEmpty(byNameAndCountry)) {
+            try {
+                this.mongoImportService.importCitiesFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        City cityToSave = new City(cityName, countryCode, Long.valueOf(byNameAndCountry.get(0).getId()));
 
         return this.cityRepository.save(cityToSave);
     }
