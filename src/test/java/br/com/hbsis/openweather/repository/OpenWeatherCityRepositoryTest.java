@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -33,9 +35,9 @@ public class OpenWeatherCityRepositoryTest {
         this.openWeatherCityRepository.save(openWeatherCity1);
         this.openWeatherCityRepository.save(openWeatherCity2);
 
-        final OpenWeatherCity cityFound = this.openWeatherCityRepository.findByNameAndCountry(blumenauCityName, brazilCountryCode);
+        final List<OpenWeatherCity> citiesFound = this.openWeatherCityRepository.findByNameAndCountry(blumenauCityName, brazilCountryCode);
 
-        assertThat(cityFound.getName()).isEqualTo(blumenauCityName);
+        assertThat(citiesFound.get(0).getName()).isEqualTo(blumenauCityName);
     }
 
 }
