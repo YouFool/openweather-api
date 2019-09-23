@@ -31,10 +31,10 @@ public class CityController {
     }
 
     /**
-     * Creates a {@link City}.
+     * Creates a {@link City} and links it with an OpenWeather city.
      *
      * @param city {@link CityDTO} city to create
-     * @return
+     * @return the created {@link City}
      */
     @PostMapping
     public City createCity(@RequestBody CityDTO city) {

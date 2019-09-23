@@ -2,7 +2,9 @@ package br.com.hbsis.openweather.service;
 
 import br.com.hbsis.openweather.configuration.CityConfiguration;
 import br.com.hbsis.openweather.dto.OpenWeatherCityDTO;
+import br.com.hbsis.openweather.entity.City;
 import br.com.hbsis.openweather.entity.OpenWeatherCity;
+import br.com.hbsis.openweather.repository.CityRepository;
 import br.com.hbsis.openweather.repository.OpenWeatherCityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service responsible for the communication with the OpenWeather API.
@@ -27,6 +30,9 @@ public class OpenWeatherService {
 
     @Autowired
     private OpenWeatherCityRepository openWeatherCityRepository;
+
+    @Autowired
+    private CityService cityService;
 
     @Autowired
     private CityConfiguration cityConfiguration;
@@ -59,13 +65,26 @@ public class OpenWeatherService {
      * @param cityId
      * @return
      */
-    public Void getCityWeather(Long cityId) {
-        //OpenWeatherCity openWeatherCity = this.findOpenWeatherCity(cityId);
+    public OpenWeatherCityDTO getCityWeather(Long cityId) {
+        City city = this.cityService.findCity(cityId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found!"));
+
 
         RestTemplate weatherRestTemplate = new RestTemplate();
-        weatherRestTemplate.getForObject("url", OpenWeatherCityDTO.class, cityId);
+        final String url = this.mountUrl(city.getOpenWeatherId().toString());
+        return weatherRestTemplate.getForObject(url, OpenWeatherCityDTO.class);
+    }
 
-        return null;
+    /**
+     * Mounts the request URL.
+     *
+     * @param cityId the OpenWeather city ID
+     * @return the URL of the request to be sent
+     */
+    private String mountUrl(String cityId) {
+        return openWeatherApiUrl +
+                "/weather?id=" + cityId
+                + "&APPID=" + this.openWeatherApiKey;
     }
 
     /**

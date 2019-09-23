@@ -36,7 +36,7 @@ public class CityService {
     }
 
     /**
-     * Creates a city with a given name and it's country code.
+     * Creates and links a city with a given name and it's country code to an existing OpenWeather city.
      *
      * @param cityName    the city name
      * @param countryCode the city country code
@@ -51,7 +51,7 @@ public class CityService {
                 .orElse(null);
 
         if (CollectionUtils.isEmpty(citiesByNameAndCountry) || openWeatherCity == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "City does not exists!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City + '" + cityName + "' not found!");
         }
 
         City cityToSave = new City(cityName, countryCode, Long.valueOf(openWeatherCity.getId()));

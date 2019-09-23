@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WeatherDTO {
+public class CityWeatherDTO {
 
     private Long id;
     private String main;
     private String description;
+    private String icon;
 }
