@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service responsible to manage cities.
+ * Service responsible to manage user-tracked cities.
  */
 @Service
 public class CityService {

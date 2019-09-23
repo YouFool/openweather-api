@@ -32,9 +32,9 @@ public class CityController {
     }
 
     /**
-     * Creates a city.
+     * Creates a {@link City}.
      *
-     * @param city City to create
+     * @param city {@link CityDTO} city to create
      * @return
      */
     @PostMapping
@@ -53,7 +53,7 @@ public class CityController {
     @DeleteMapping(path = "/{cityId}")
     public String deleteCity(@PathVariable Long cityId) {
         City city = this.cityService.findCity(cityId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City with id: '" + cityId + "' not found!"));
 
         this.cityService.deleteCity(city);
         return "City '" + city.getName() + "' has been removed!";
