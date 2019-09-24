@@ -28,8 +28,9 @@ public class CityService {
     /**
      * Finds and returns all cities.
      * TODO: make it pageable
+     * TODO: return basic weather data in the output
      *
-     * @return
+     * @return a {@link List} of {@link City} user-inputted cities
      */
     public List<City> findAll() {
         return this.cityRepository.findAll();

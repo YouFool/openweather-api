@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -25,5 +24,5 @@ public class OpenWeatherCityDTO {
     private CityStatsDTO cityStats;
 
     @JsonAlias(value = "dt_txt")
-    private LocalDate date;
+    private String date; //Format: 2019-09-24 03:00:00
 }

@@ -96,7 +96,7 @@ public class OpenWeatherService {
      * @return the URL
      */
     private String mountUrl(String cityId, boolean isForecast) {
-        String apiPath = isForecast ? "/weather" : "/forecast";
+        String apiPath = isForecast ? "/forecast" : "/weather" ;
         return openWeatherApiUrl + apiPath +
                 "?id=" + cityId +
                 "&units=metric" +

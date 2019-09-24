@@ -1,6 +1,8 @@
 package br.com.hbsis.openweather.controller;
 
+import br.com.hbsis.openweather.dto.ForecastDTO;
 import br.com.hbsis.openweather.dto.OpenWeatherCityDTO;
+import br.com.hbsis.openweather.entity.City;
 import br.com.hbsis.openweather.service.OpenWeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,26 +21,26 @@ public class OpenWeatherController {
     private OpenWeatherService openWeatherService;
 
     /**
-     * Gets the city weather details.
+     * Returns the weather details of a given {@link City}.
      *
-     * @param cityId the city id
-     * @return
+     * @param cityId the city ID
+     * @return a {@link OpenWeatherCityDTO} containing weather data
      */
-    @GetMapping(path = "/{cityId}")
+    @GetMapping(path = "/city/{cityId}")
     public OpenWeatherCityDTO getCityWeather(@PathVariable Long cityId) {
         return this.openWeatherService.getCityWeather(cityId);
     }
 
     /**
-     * Gets the city 5-day forecast.
+     * Returns a 5-day forecast of a given {@link City}.
      *
-     * @param cityId the city id
-     * @return
+     * @param cityId the city ID
+     * @return a {@link ForecastDTO} containing forecast data TODO: validate end-data
+     */
     @GetMapping(path = "/forecast/{cityId}")
-    public Void getCityForecast(@PathVariable Long cityId) {
+    public ForecastDTO getCityForecast(@PathVariable Long cityId) {
         return this.openWeatherService.getCityForecast(cityId);
     }
-    */
 
 
 }

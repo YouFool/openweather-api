@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * DTO that represents a 5-day forecast.
  */
@@ -16,5 +18,5 @@ import lombok.NoArgsConstructor;
 public class ForecastDTO {
 
     @JsonAlias(value = "list")
-    private OpenWeatherCityDTO weatherData;
+    private List<OpenWeatherCityDTO> weatherData;
 }
