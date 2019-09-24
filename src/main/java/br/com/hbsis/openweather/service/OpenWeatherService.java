@@ -1,10 +1,10 @@
 package br.com.hbsis.openweather.service;
 
 import br.com.hbsis.openweather.configuration.CityConfiguration;
+import br.com.hbsis.openweather.dto.ForecastDTO;
 import br.com.hbsis.openweather.dto.OpenWeatherCityDTO;
 import br.com.hbsis.openweather.entity.City;
 import br.com.hbsis.openweather.entity.OpenWeatherCity;
-import br.com.hbsis.openweather.repository.CityRepository;
 import br.com.hbsis.openweather.repository.OpenWeatherCityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service responsible for the communication with the OpenWeather API.
@@ -38,7 +37,7 @@ public class OpenWeatherService {
     private CityConfiguration cityConfiguration;
 
     /**
-     * Reads a file containing all OpenWeather cities and saves all entities in MongoDB.
+     * Reads a file containing all OpenWeather cities and saves all entities in a MongoDB collection.
      */
     public void createAllCities() {
         List<OpenWeatherCity> openWeatherCities = this.cityConfiguration.readCities();
@@ -59,45 +58,48 @@ public class OpenWeatherService {
     }
 
     /**
-     * TODO: doc
-     * Fetchs a given city weather data.
+     * Finds a {@link City} and then requests city-weather data from OpenWeather API.
      *
-     * @param cityId
-     * @return
+     * @param cityId the user-inputted city ID
+     * @return a {@link OpenWeatherCityDTO} DTO containing the city weather data
+     * @throws ResponseStatusException if the city is not found
      */
     public OpenWeatherCityDTO getCityWeather(Long cityId) {
         City city = this.cityService.findCity(cityId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found!"));
-
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City with id: '" + cityId + "' not found!"));
 
         RestTemplate weatherRestTemplate = new RestTemplate();
-        final String url = this.mountUrl(city.getOpenWeatherId().toString());
-        return weatherRestTemplate.getForObject(url, OpenWeatherCityDTO.class);
+        final String weatherApiUrl = this.mountUrl(city.getOpenWeatherId().toString(), false);
+        return weatherRestTemplate.getForObject(weatherApiUrl, OpenWeatherCityDTO.class);
     }
 
     /**
-     * Mounts the request URL.
+     * Finds a {@link City} and then requests a 5-day forecast from OpenWeather API.
+     *
+     * @param cityId the user-inputted city ID
+     * @return a {@link ForecastDTO} 5-day forecast TODO: maybe i'll need to convert/group it
+     * @throws ResponseStatusException if the city is not found
+     */
+    public ForecastDTO getCityForecast(Long cityId) {
+        City city = this.cityService.findCity(cityId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City with id: '" + cityId + "' not found!"));
+
+        RestTemplate forecastRestTemplate = new RestTemplate();
+        final String forecastApiUrl = this.mountUrl(city.getOpenWeatherId().toString(), true);
+        return forecastRestTemplate.getForObject(forecastApiUrl, ForecastDTO.class, cityId);
+    }
+
+    /**
+     * Mounts the URL to the corresponding OpenWeather API.
      *
      * @param cityId the OpenWeather city ID
-     * @return the URL of the request to be sent
+     * @return the URL
      */
-    private String mountUrl(String cityId) {
-        return openWeatherApiUrl +
-                "/weather?id=" + cityId
-                + "&APPID=" + this.openWeatherApiKey;
-    }
-
-    /**
-     * Fetchs a five day forecast for a given city.
-     *
-     * @param cityId
-     * @return
-     */
-    public Void getCityForecast(Long cityId) {
-
-//        RestTemplate forecastRestTemplate = new RestTemplate();
-//        forecastRestTemplate.getForObject("url", ForecastDTO.class, cityId);
-
-        return null;
+    private String mountUrl(String cityId, boolean isForecast) {
+        String apiPath = isForecast ? "/weather" : "/forecast";
+        return openWeatherApiUrl + apiPath +
+                "?id=" + cityId +
+                "&units=metric" +
+                "&APPID=" + this.openWeatherApiKey;
     }
 }

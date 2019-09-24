@@ -1,0 +1,20 @@
+package br.com.hbsis.openweather.dto;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * DTO that represents a 5-day forecast.
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ForecastDTO {
+
+    @JsonAlias(value = "list")
+    private OpenWeatherCityDTO weatherData;
+}
