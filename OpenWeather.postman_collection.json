@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "dd8570f2-ddd5-4deb-a727-5cc150c9fabf",
+		"name": "OpenWeather",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "City",
+			"item": [
+				{
+					"name": "Create City",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Blumenau\",\n\t\"countryCode\": \"BR\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8086/city",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"city"
+							]
+						},
+						"description": "Creates a city with a given name and country code"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete City",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8086/city/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"city",
+								"1"
+							]
+						},
+						"description": "Deletes a city by it's ID"
+					},
+					"response": []
+				},
+				{
+					"name": "List cities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8086/city/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"city",
+								""
+							]
+						},
+						"description": "List all created cities"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Weather",
+			"item": [
+				{
+					"name": "Get city weather",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8086/weather/city/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"weather",
+								"city",
+								"1"
+							]
+						},
+						"description": "Get's a city weather data from OpenWeather API"
+					},
+					"response": [
+						{
+							"name": "Get city weather",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8086/weather/city/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"weather",
+										"city",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 24 Sep 2019 02:47:18 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cityWeathers\": [\n        {\n            \"id\": 803,\n            \"main\": \"Clouds\",\n            \"description\": \"broken clouds\",\n            \"icon\": \"04n\"\n        }\n    ],\n    \"cityStats\": {\n        \"temperature\": 15.92,\n        \"pressure\": 1027,\n        \"humidity\": 63,\n        \"minimumTemperature\": 13.33,\n        \"maximumTemperature\": 18.33\n    },\n    \"date\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Get city forecast",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8086/weather/forecast/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"weather",
+								"forecast",
+								"1"
+							]
+						},
+						"description": "Get's a city 5-day forecast from OpenWeather API"
+					},
+					"response": [
+						{
+							"name": "Get city forecast",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8086/weather/forecast/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8086",
+									"path": [
+										"weather",
+										"forecast",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 24 Sep 2019 04:16:54 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"weatherData\": [\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 15.11,\n                \"pressure\": 1025,\n                \"humidity\": 87,\n                \"minimumTemperature\": 10.95,\n                \"maximumTemperature\": 15.11\n            },\n            \"date\": \"2019-09-24 06:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.07,\n                \"pressure\": 1025,\n                \"humidity\": 88,\n                \"minimumTemperature\": 10.95,\n                \"maximumTemperature\": 14.07\n            },\n            \"date\": \"2019-09-24 09:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 17.02,\n                \"pressure\": 1025,\n                \"humidity\": 73,\n                \"minimumTemperature\": 14.94,\n                \"maximumTemperature\": 17.02\n            },\n            \"date\": \"2019-09-24 12:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 19.79,\n                \"pressure\": 1023,\n                \"humidity\": 58,\n                \"minimumTemperature\": 18.75,\n                \"maximumTemperature\": 19.79\n            },\n            \"date\": \"2019-09-24 15:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 17.56,\n                \"pressure\": 1020,\n                \"humidity\": 70,\n                \"minimumTemperature\": 17.56,\n                \"maximumTemperature\": 17.56\n            },\n            \"date\": \"2019-09-24 18:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.85,\n                \"pressure\": 1021,\n                \"humidity\": 89,\n                \"minimumTemperature\": 14.85,\n                \"maximumTemperature\": 14.85\n            },\n            \"date\": \"2019-09-24 21:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 13.74,\n                \"pressure\": 1023,\n                \"humidity\": 95,\n                \"minimumTemperature\": 13.74,\n                \"maximumTemperature\": 13.74\n            },\n            \"date\": \"2019-09-25 00:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 13.25,\n                \"pressure\": 1022,\n                \"humidity\": 98,\n                \"minimumTemperature\": 13.25,\n                \"maximumTemperature\": 13.25\n            },\n            \"date\": \"2019-09-25 03:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 12.55,\n                \"pressure\": 1021,\n                \"humidity\": 99,\n                \"minimumTemperature\": 12.55,\n                \"maximumTemperature\": 12.55\n            },\n            \"date\": \"2019-09-25 06:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 13.05,\n                \"pressure\": 1021,\n                \"humidity\": 98,\n                \"minimumTemperature\": 13.05,\n                \"maximumTemperature\": 13.05\n            },\n            \"date\": \"2019-09-25 09:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 16.41,\n                \"pressure\": 1021,\n                \"humidity\": 86,\n                \"minimumTemperature\": 16.41,\n                \"maximumTemperature\": 16.41\n            },\n            \"date\": \"2019-09-25 12:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 21.45,\n                \"pressure\": 1019,\n                \"humidity\": 58,\n                \"minimumTemperature\": 21.45,\n                \"maximumTemperature\": 21.45\n            },\n            \"date\": \"2019-09-25 15:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 20.55,\n                \"pressure\": 1017,\n                \"humidity\": 64,\n                \"minimumTemperature\": 20.55,\n                \"maximumTemperature\": 20.55\n            },\n            \"date\": \"2019-09-25 18:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 16.45,\n                \"pressure\": 1017,\n                \"humidity\": 82,\n                \"minimumTemperature\": 16.45,\n                \"maximumTemperature\": 16.45\n            },\n            \"date\": \"2019-09-25 21:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 12.47,\n                \"pressure\": 1019,\n                \"humidity\": 97,\n                \"minimumTemperature\": 12.47,\n                \"maximumTemperature\": 12.47\n            },\n            \"date\": \"2019-09-26 00:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 802,\n                    \"main\": \"Clouds\",\n                    \"description\": \"scattered clouds\",\n                    \"icon\": \"03n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 11.22,\n                \"pressure\": 1019,\n                \"humidity\": 99,\n                \"minimumTemperature\": 11.22,\n                \"maximumTemperature\": 11.22\n            },\n            \"date\": \"2019-09-26 03:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 802,\n                    \"main\": \"Clouds\",\n                    \"description\": \"scattered clouds\",\n                    \"icon\": \"03n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 10.32,\n                \"pressure\": 1018,\n                \"humidity\": 99,\n                \"minimumTemperature\": 10.32,\n                \"maximumTemperature\": 10.32\n            },\n            \"date\": \"2019-09-26 06:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 803,\n                    \"main\": \"Clouds\",\n                    \"description\": \"broken clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 11.35,\n                \"pressure\": 1019,\n                \"humidity\": 97,\n                \"minimumTemperature\": 11.35,\n                \"maximumTemperature\": 11.35\n            },\n            \"date\": \"2019-09-26 09:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 803,\n                    \"main\": \"Clouds\",\n                    \"description\": \"broken clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 15.95,\n                \"pressure\": 1019,\n                \"humidity\": 76,\n                \"minimumTemperature\": 15.95,\n                \"maximumTemperature\": 15.95\n            },\n            \"date\": \"2019-09-26 12:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 801,\n                    \"main\": \"Clouds\",\n                    \"description\": \"few clouds\",\n                    \"icon\": \"02d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 24.75,\n                \"pressure\": 1018,\n                \"humidity\": 47,\n                \"minimumTemperature\": 24.75,\n                \"maximumTemperature\": 24.75\n            },\n            \"date\": \"2019-09-26 15:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 800,\n                    \"main\": \"Clear\",\n                    \"description\": \"clear sky\",\n                    \"icon\": \"01d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 25.85,\n                \"pressure\": 1016,\n                \"humidity\": 40,\n                \"minimumTemperature\": 25.85,\n                \"maximumTemperature\": 25.85\n            },\n            \"date\": \"2019-09-26 18:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 800,\n                    \"main\": \"Clear\",\n                    \"description\": \"clear sky\",\n                    \"icon\": \"01d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 19.11,\n                \"pressure\": 1016,\n                \"humidity\": 75,\n                \"minimumTemperature\": 19.11,\n                \"maximumTemperature\": 19.11\n            },\n            \"date\": \"2019-09-26 21:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 800,\n                    \"main\": \"Clear\",\n                    \"description\": \"clear sky\",\n                    \"icon\": \"01n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.87,\n                \"pressure\": 1019,\n                \"humidity\": 98,\n                \"minimumTemperature\": 14.87,\n                \"maximumTemperature\": 14.87\n            },\n            \"date\": \"2019-09-27 00:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 802,\n                    \"main\": \"Clouds\",\n                    \"description\": \"scattered clouds\",\n                    \"icon\": \"03n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.19,\n                \"pressure\": 1019,\n                \"humidity\": 99,\n                \"minimumTemperature\": 14.19,\n                \"maximumTemperature\": 14.19\n            },\n            \"date\": \"2019-09-27 03:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 803,\n                    \"main\": \"Clouds\",\n                    \"description\": \"broken clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.99,\n                \"pressure\": 1018,\n                \"humidity\": 97,\n                \"minimumTemperature\": 14.99,\n                \"maximumTemperature\": 14.99\n            },\n            \"date\": \"2019-09-27 06:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.94,\n                \"pressure\": 1019,\n                \"humidity\": 96,\n                \"minimumTemperature\": 14.94,\n                \"maximumTemperature\": 14.94\n            },\n            \"date\": \"2019-09-27 09:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 19.45,\n                \"pressure\": 1019,\n                \"humidity\": 75,\n                \"minimumTemperature\": 19.45,\n                \"maximumTemperature\": 19.45\n            },\n            \"date\": \"2019-09-27 12:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 22.58,\n                \"pressure\": 1019,\n                \"humidity\": 57,\n                \"minimumTemperature\": 22.58,\n                \"maximumTemperature\": 22.58\n            },\n            \"date\": \"2019-09-27 15:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 20.15,\n                \"pressure\": 1017,\n                \"humidity\": 65,\n                \"minimumTemperature\": 20.15,\n                \"maximumTemperature\": 20.15\n            },\n            \"date\": \"2019-09-27 18:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 802,\n                    \"main\": \"Clouds\",\n                    \"description\": \"scattered clouds\",\n                    \"icon\": \"03d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 16.77,\n                \"pressure\": 1018,\n                \"humidity\": 79,\n                \"minimumTemperature\": 16.77,\n                \"maximumTemperature\": 16.77\n            },\n            \"date\": \"2019-09-27 21:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 803,\n                    \"main\": \"Clouds\",\n                    \"description\": \"broken clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 13.62,\n                \"pressure\": 1020,\n                \"humidity\": 94,\n                \"minimumTemperature\": 13.62,\n                \"maximumTemperature\": 13.62\n            },\n            \"date\": \"2019-09-28 00:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 13.8,\n                \"pressure\": 1020,\n                \"humidity\": 92,\n                \"minimumTemperature\": 13.8,\n                \"maximumTemperature\": 13.8\n            },\n            \"date\": \"2019-09-28 03:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 13.66,\n                \"pressure\": 1019,\n                \"humidity\": 93,\n                \"minimumTemperature\": 13.66,\n                \"maximumTemperature\": 13.66\n            },\n            \"date\": \"2019-09-28 06:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 13.66,\n                \"pressure\": 1020,\n                \"humidity\": 94,\n                \"minimumTemperature\": 13.66,\n                \"maximumTemperature\": 13.66\n            },\n            \"date\": \"2019-09-28 09:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.45,\n                \"pressure\": 1020,\n                \"humidity\": 89,\n                \"minimumTemperature\": 14.45,\n                \"maximumTemperature\": 14.45\n            },\n            \"date\": \"2019-09-28 12:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 803,\n                    \"main\": \"Clouds\",\n                    \"description\": \"broken clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 20.45,\n                \"pressure\": 1018,\n                \"humidity\": 60,\n                \"minimumTemperature\": 20.45,\n                \"maximumTemperature\": 20.45\n            },\n            \"date\": \"2019-09-28 15:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 802,\n                    \"main\": \"Clouds\",\n                    \"description\": \"scattered clouds\",\n                    \"icon\": \"03d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 19.61,\n                \"pressure\": 1015,\n                \"humidity\": 68,\n                \"minimumTemperature\": 19.61,\n                \"maximumTemperature\": 19.61\n            },\n            \"date\": \"2019-09-28 18:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 803,\n                    \"main\": \"Clouds\",\n                    \"description\": \"broken clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 16.2,\n                \"pressure\": 1015,\n                \"humidity\": 85,\n                \"minimumTemperature\": 16.2,\n                \"maximumTemperature\": 16.2\n            },\n            \"date\": \"2019-09-28 21:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 803,\n                    \"main\": \"Clouds\",\n                    \"description\": \"broken clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.64,\n                \"pressure\": 1017,\n                \"humidity\": 92,\n                \"minimumTemperature\": 14.64,\n                \"maximumTemperature\": 14.64\n            },\n            \"date\": \"2019-09-29 00:00:00\"\n        },\n        {\n            \"cityWeathers\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"cityStats\": {\n                \"temperature\": 14.17,\n                \"pressure\": 1017,\n                \"humidity\": 96,\n                \"minimumTemperature\": 14.17,\n                \"maximumTemperature\": 14.17\n            },\n            \"date\": \"2019-09-29 03:00:00\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	]
+}

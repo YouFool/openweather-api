@@ -3,3 +3,9 @@ jdk:
   - openjdk8
 before_install:
   - chmod +x mvnw
+notifications:
+  email:
+    recipients:
+      - joaoheckmann@hotmail.com
+    on_success: never
+    on_failure: always
