@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/weather")
 public class OpenWeatherController {
 
-    @Autowired
     private OpenWeatherService openWeatherService;
+
+    @Autowired
+    public OpenWeatherController(OpenWeatherService openWeatherService) {
+        this.openWeatherService = openWeatherService;
+    }
 
     /**
      * Returns the weather details of a given {@link City}.
@@ -35,7 +39,7 @@ public class OpenWeatherController {
      * Returns a 5-day forecast of a given {@link City}.
      *
      * @param cityId the city ID
-     * @return a {@link ForecastDTO} containing forecast data TODO: validate end-data
+     * @return a {@link ForecastDTO} containing forecast data
      */
     @GetMapping(path = "/forecast/{cityId}")
     public ForecastDTO getCityForecast(@PathVariable Long cityId) {

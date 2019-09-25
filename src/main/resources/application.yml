@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:openweather
+  jpa:
+    database: H2
+    show-sql: true
+
+server:
+  port: 8086
+
+openweather:
+  api:
+    baseurl: http://api.openweathermap.org/data/2.5
+    key: API_KEY

@@ -4,6 +4,8 @@ import br.com.hbsis.openweather.entity.City;
 import br.com.hbsis.openweather.entity.OpenWeatherCity;
 import br.com.hbsis.openweather.repository.CityRepository;
 import br.com.hbsis.openweather.repository.OpenWeatherCityRepository;
+import br.com.hbsis.openweather.util.Messages;
+import br.com.hbsis.openweather.util.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,11 +21,15 @@ import java.util.Optional;
 @Service
 public class CityService {
 
-    @Autowired
     private CityRepository cityRepository;
 
-    @Autowired
     private OpenWeatherCityRepository openWeatherCityRepository;
+
+    @Autowired
+    public CityService(CityRepository cityRepository, OpenWeatherCityRepository openWeatherCityRepository) {
+        this.cityRepository = cityRepository;
+        this.openWeatherCityRepository = openWeatherCityRepository;
+    }
 
     /**
      * Finds and returns all cities.
@@ -52,7 +58,8 @@ public class CityService {
                 .orElse(null);
 
         if (CollectionUtils.isEmpty(citiesByNameAndCountry) || openWeatherCity == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City + '" + cityName + "' not found!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    Translator.translateMessage(Messages.ERROR_CITY_WITH_NAME_NOT_FOUND, cityName));
         }
 
         City cityToSave = new City(cityName, countryCode, Long.valueOf(openWeatherCity.getId()));
@@ -61,7 +68,7 @@ public class CityService {
     }
 
     /**
-     * Deletes a city.
+     * Deletes a {@link City}.
      *
      * @param city the city to be deleted
      */
@@ -70,12 +77,25 @@ public class CityService {
     }
 
     /**
-     * Finds a city by it's ID.
+     * Finds an {@link Optional} {@link City} by it's ID.
      *
      * @param cityId the city id
-     * @return an {@link Optional} city
+     * @return a city or empty result
      */
-    public Optional<City> findCity(Long cityId) {
+    private Optional<City> findCity(Long cityId) {
         return Optional.of(this.cityRepository.getOne(cityId));
+    }
+
+    /**
+     * Find's a {@link City} by it's ID.
+     *
+     * @param cityId the city id
+     * @return the city found
+     * @throws ResponseStatusException if the city does not exists
+     */
+    public City findCityByIdThrowsException(Long cityId) {
+        return this.findCity(cityId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        Translator.translateMessage(Messages.ERROR_CITY_WITH_ID_NOT_FOUND, cityId)));
     }
 }

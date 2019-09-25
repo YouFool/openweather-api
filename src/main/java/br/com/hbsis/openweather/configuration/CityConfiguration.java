@@ -11,11 +11,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * Bean responsible for {@link OpenWeatherCity} configurations.
+ */
 @Configuration
 public class CityConfiguration {
 
     /**
-     * Reads a JSON file containing all OpenWeather available cities.
+     * Reads a JSON file containing all OpenWeather cities.
      *
      * @return a {@link List} of {@link OpenWeatherCity} cities
      * @throws ResponseStatusException if any I/O error occurs
@@ -26,8 +29,7 @@ public class CityConfiguration {
         };
 
         try (InputStream inputStream = TypeReference.class.getResourceAsStream("/static/city.list.json")) {
-            List<OpenWeatherCity> cities = mapper.readValue(inputStream, mapType);
-            return cities;
+            return mapper.readValue(inputStream, mapType);
         } catch (IOException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }

@@ -4,9 +4,7 @@ import br.com.hbsis.openweather.dto.CityDTO;
 import br.com.hbsis.openweather.entity.City;
 import br.com.hbsis.openweather.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -17,8 +15,12 @@ import java.util.List;
 @RequestMapping("/city")
 public class CityController {
 
-    @Autowired
     private CityService cityService;
+
+    @Autowired
+    public CityController(CityService cityService) {
+        this.cityService = cityService;
+    }
 
     /**
      * Returns all user-persisted cities.
@@ -47,12 +49,9 @@ public class CityController {
      * @param cityId the city id
      */
     @DeleteMapping(path = "/{cityId}")
-    public String deleteCity(@PathVariable Long cityId) {
-        City city = this.cityService.findCity(cityId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "City with id: '" + cityId + "' not found!"));
-
+    public void deleteCity(@PathVariable Long cityId) {
+        City city = this.cityService.findCityByIdThrowsException(cityId);
         this.cityService.deleteCity(city);
-        return "City '" + city.getName() + "' has been removed!";
     }
 
 }
