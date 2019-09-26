@@ -48,18 +48,20 @@ para importar/rodar o projeto
 ### Get Started
 Você deve possuir o [Java Development Kit 8](http://openjdk.java.net/install/) e, opcionalmente, o Apache Maven. Além disso, será necessário cadastrar-se no OpenWeather para obter uma **API Key**.
 
-1. Clone este repositório: `git clone https://github.com/YouFool/openweather-api.git`
-2. Entre na raiz do projeto: `cd openweather-api/`
-3. Gera o artefato com comando: `mvn package`
-    3. Alternativamente, caso não possua o Maven instalado: `mvnw package -DskipTests=true`
-4. Rode a aplicação executando: `java -jar -Dspring.profiles.active=prod target/openweather-0.0.1-SNAPSHOT.jar`
-    4. Outra opção, caso possua [Docker](https://www.docker.com/) instalado, é rodar a aplicação via: `docker build -t openweather . && docker run --name openweather-api openweather` 
-5. A aplicação será servida por padrão no endereço `localhost:8086` por padrão
-    5. É possível alterar a porta da aplicação no arquivo `application.yml`
-    5. Altere a propriedade da linha 14 no arquivo `application.yml` com o valor da sua *API Key*
-    5. Logo ao inicializar, o app realizará o import do arquivo `city.list.json` contendo todas as cidades do OpenWeather no MongoDB
-    5. Ao printar seguinte linha no console: `OpenWeather cities are now saved!`, a aplicação estará pronta para receber requisições 
-6. Importe o arquivo `OpenWeather.postman_collection.json` no seu REST Client favorito
-    6. Cadastre uma cidade com nome e código do país via `HTTP POST` no endpoint `/city`
-    6. Use o ID da cidade cadastrada para realizar as seguintes requisições nas APIs `/weather` e `/forecast`
+* Clone este repositório: `git clone https://github.com/YouFool/openweather-api.git`
+* Entre na raiz do projeto: `cd openweather-api/`
+* Gera o artefato com comando: `mvn package`
+   * Alternativamente, caso não possua o Maven instalado: `mvnw package -DskipTests=true`
+    
+    
+* Rode a aplicação executando: `java -jar -Dspring.profiles.active=prod target/openweather-0.0.1-SNAPSHOT.jar`
+    * Outra opção, caso possua [Docker](https://www.docker.com/) instalado, é rodar a aplicação via: `docker build -t openweather . && docker run --name openweather-api -P openweather` 
+* A aplicação será servida por padrão no endereço `localhost:8086` por padrão
+    * É possível alterar a porta da aplicação no arquivo `application.yml`
+    * Altere a propriedade da linha 14 no arquivo `application.yml` com o valor da sua *API Key*
+    * Logo ao inicializar, o app realizará o import do arquivo `city.list.json` contendo todas as cidades do OpenWeather no MongoDB
+    * Ao printar seguinte linha no console: `OpenWeather cities are now saved!`, a aplicação estará pronta para receber requisições 
+* Importe o arquivo `OpenWeather.postman_collection.json` no seu REST Client favorito
+    * Cadastre uma cidade com nome e código do país via `HTTP POST` no endpoint `/city`
+    * Use o ID da cidade cadastrada para realizar as seguintes requisições nas APIs `/weather` e `/forecast`
 
