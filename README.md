@@ -43,7 +43,7 @@ para importar/rodar o projeto
 * [H2 | In-Memory Database](https://www.h2database.com/html/main.html) - Banco de dados em memória sem necessidade de configuração
 * [Flyway | Database Migrations Made Easy](https://github.com/flyway/flyway) - Migração de banco sem dificuldade
 * [Embedded MongoDB](https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo) - Possibilidade de importar o arquivo `city.list.json` via `mongoimport` no start da  aplicação
-* [TravisCI](https://travis-ci.org/) - Ci fácil de configurar, integrado diretamente com GitHub
+* [TravisCI](https://travis-ci.org/) - CI fácil de configurar, integrado diretamente com GitHub
 
 ### Get Started
 Você deve possuir o [Java Development Kit 8](http://openjdk.java.net/install/) e, opcionalmente, o Apache Maven. Além disso, será necessário cadastrar-se no OpenWeather para obter uma **API Key**.
