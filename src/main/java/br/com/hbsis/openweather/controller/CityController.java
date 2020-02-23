@@ -16,7 +16,7 @@ import java.util.List;
 @CrossOrigin
 public class CityController {
 
-    private CityService cityService;
+    private final CityService cityService;
 
     @Autowired
     public CityController(CityService cityService) {
@@ -49,7 +49,7 @@ public class CityController {
      *
      * @param cityId the city id
      */
-    @DeleteMapping(path = "/{cityId}")
+    @DeleteMapping("/{cityId}")
     public void deleteCity(@PathVariable Long cityId) {
         City city = this.cityService.findCityByIdThrowsException(cityId);
         this.cityService.deleteCity(city);

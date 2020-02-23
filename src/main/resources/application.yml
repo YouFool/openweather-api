@@ -1,8 +1,7 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:openweather
+    url: jdbc:h2:~/openweather;AUTO_SERVER=TRUE
   jpa:
-    database: H2
     show-sql: true
 
 server:

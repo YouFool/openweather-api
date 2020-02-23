@@ -5,7 +5,6 @@ import br.com.hbsis.openweather.dto.OpenWeatherCityDTO;
 import br.com.hbsis.openweather.entity.OpenWeatherCity;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

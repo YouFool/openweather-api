@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin
 public class OpenWeatherController {
 
-    private OpenWeatherService openWeatherService;
+    private final OpenWeatherService openWeatherService;
 
     @Autowired
     public OpenWeatherController(OpenWeatherService openWeatherService) {
@@ -33,7 +33,7 @@ public class OpenWeatherController {
      * @param cityId the city ID
      * @return a {@link OpenWeatherCityDTO} containing weather data
      */
-    @GetMapping(path = "/city/{cityId}")
+    @GetMapping("/city/{cityId}")
     public OpenWeatherCityDTO getCityWeather(@PathVariable Long cityId) {
         return this.openWeatherService.getCityWeather(cityId);
     }
@@ -44,7 +44,7 @@ public class OpenWeatherController {
      * @param cityId the city ID
      * @return a {@link ForecastDTO} containing forecast data
      */
-    @GetMapping(path = "/forecast/{cityId}")
+    @GetMapping("/forecast/{cityId}")
     public ForecastDTO getCityForecast(@PathVariable Long cityId) {
         return this.openWeatherService.getCityForecast(cityId);
     }
