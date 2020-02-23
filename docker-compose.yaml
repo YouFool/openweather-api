@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  books:
+    container_name: openweather
+    build:
+      context: ./openweather-api/
+      dockerfile: Dockerfile
+    image: openweather-api:latest
+    ports:
+      - "8086:8086"
+    restart: always
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+  frontend:
+    container_name: openweather-frontend
+    build:
+      context: ./openweather-react/
+      dockerfile: Dockerfile
+    image: openweather-frontend:latest
+    ports:
+      - "80:80"
