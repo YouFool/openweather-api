@@ -21,9 +21,8 @@ import java.util.Optional;
 @Service
 public class CityService {
 
-    private CityRepository cityRepository;
-
-    private OpenWeatherCityRepository openWeatherCityRepository;
+    private final CityRepository cityRepository;
+    private final OpenWeatherCityRepository openWeatherCityRepository;
 
     @Autowired
     public CityService(CityRepository cityRepository, OpenWeatherCityRepository openWeatherCityRepository) {
@@ -33,7 +32,6 @@ public class CityService {
 
     /**
      * Finds and returns all cities.
-     * TODO: make it pageable
      * TODO: return basic weather data in the output
      *
      * @return a {@link List} of {@link City} user-inputted cities
@@ -62,7 +60,7 @@ public class CityService {
                     Translator.translateMessage(Messages.ERROR_CITY_WITH_NAME_NOT_FOUND, cityName));
         }
 
-        City cityToSave = new City(cityName, countryCode, Long.valueOf(openWeatherCity.getId()));
+        City cityToSave = new City(cityName, countryCode, openWeatherCity.getId());
 
         return this.cityRepository.save(cityToSave);
     }

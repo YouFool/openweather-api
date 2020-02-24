@@ -43,7 +43,7 @@ public class CityServiceTest {
     public void should_create_city() {
         final String cityName = "Auckland";
         final String countryCode = "NZ";
-        OpenWeatherCity openWeatherCity = new OpenWeatherCity("333", cityName, countryCode);
+        OpenWeatherCity openWeatherCity = new OpenWeatherCity("333", 1L, cityName, countryCode);
 
         ArgumentCaptor<City> cityArgumentCaptor = ArgumentCaptor.forClass(City.class);
         when(mockOpenWeatherCityRepository.findByNameAndCountry(cityName, countryCode))
@@ -62,7 +62,7 @@ public class CityServiceTest {
     public void should_throw_exception_when_city_does_not_exists() {
         final String cityName = "Auckland";
         final String countryCode = "NZ";
-        OpenWeatherCity openWeatherCity = new OpenWeatherCity("333", cityName, countryCode);
+        OpenWeatherCity openWeatherCity = new OpenWeatherCity("333", 1L, cityName, countryCode);
 
         try {
             service.createCity(cityName, countryCode);

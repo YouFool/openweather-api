@@ -17,6 +17,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ForecastDTO {
 
+    /**
+     * City weather data.
+     */
     @JsonAlias(value = "list")
     private List<OpenWeatherCityDTO> weatherData;
 }

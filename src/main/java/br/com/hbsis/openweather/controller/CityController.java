@@ -29,6 +29,7 @@ public class CityController {
      * @return list with {@link City} cities
      */
     @GetMapping
+    // TODO: 24/02/2020 Add pageable
     public List<City> listCities() {
         return this.cityService.findAll();
     }

@@ -1,9 +1,9 @@
 package br.com.hbsis.openweather.util;
 
+import org.springframework.util.StringUtils;
+
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Translator for application messages.
@@ -25,7 +25,7 @@ public class Translator {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("messages_en_US");
         String message = resourceBundle.getString(key.getMessageCode());
 
-        if (isNotBlank(message) && params.length != 0) {
+        if (StringUtils.hasText(message) && params.length != 0) {
             try {
                 return MessageFormat.format(message, params);
             } catch (Exception e) {

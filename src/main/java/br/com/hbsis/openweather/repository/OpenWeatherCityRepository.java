@@ -12,9 +12,8 @@ public interface OpenWeatherCityRepository extends MongoRepository<OpenWeatherCi
 
     /**
      * Finds a city by it's name and country code.
-     *TODO: document duplicates
      *
-     * @param name the city name
+     * @param name    the city name
      * @param country city country code
      * @return the {@link OpenWeatherCity} or null
      */

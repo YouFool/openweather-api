@@ -10,9 +10,13 @@ services:
     ports:
       - "8086:8086"
     restart: always
+    depends_on:
+      - mongo
   mongo:
     container_name: mongo
     image: mongo
+    ports:
+      - "27017:27017"
     restart: always
   frontend:
     container_name: openweather-frontend
