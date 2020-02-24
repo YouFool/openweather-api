@@ -60,7 +60,7 @@ public class CityService {
                     Translator.translateMessage(Messages.ERROR_CITY_WITH_NAME_NOT_FOUND, cityName));
         }
 
-        City cityToSave = new City(cityName, countryCode, openWeatherCity.getId());
+        City cityToSave = new City(cityName, countryCode, openWeatherCity.getCityId().toString());
 
         return this.cityRepository.save(cityToSave);
     }

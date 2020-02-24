@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -39,14 +38,6 @@ public class OpenWeatherCityDTO {
     @JsonAlias(value = "dt_txt")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private LocalDateTime date;
-
-    /**
-     * OpenWeather date comes in the following format: 2019-09-24 03:00:00.
-     */
-    @JsonAlias(value = "dt_txt")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private LocalDate date2;
+    private LocalDate date;
 
 }

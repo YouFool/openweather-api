@@ -33,7 +33,7 @@ public class OpenWeatherController {
      * @param cityId the city ID
      * @return a {@link OpenWeatherCityDTO} containing weather data
      */
-    @GetMapping("/city/{cityId}")
+    @GetMapping("/{cityId}")
     public OpenWeatherCityDTO getCityWeather(@PathVariable Long cityId) {
         return this.openWeatherService.getCityWeather(cityId);
     }

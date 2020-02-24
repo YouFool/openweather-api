@@ -1,6 +1,8 @@
 spring:
   datasource:
     url: jdbc:h2:~/openweather;AUTO_SERVER=TRUE
+    username: sa
+    password: sa
   data:
     mongodb:
       #uri: mongodb://mongo:27017/test

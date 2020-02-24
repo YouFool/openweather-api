@@ -22,13 +22,11 @@ import org.springframework.web.server.ResponseStatusException;
 public class OpenWeatherService {
 
     private final CityService cityService;
-    private final OpenWeatherCityConverter openWeatherCityConverter;
     private final OpenweatherConfiguration openweatherConfiguration;
 
     @Autowired
-    public OpenWeatherService(CityService cityService, OpenWeatherCityConverter openWeatherCityConverter, OpenweatherConfiguration openweatherConfiguration) {
+    public OpenWeatherService(CityService cityService, OpenweatherConfiguration openweatherConfiguration) {
         this.cityService = cityService;
-        this.openWeatherCityConverter = openWeatherCityConverter;
         this.openweatherConfiguration = openweatherConfiguration;
     }
 
@@ -64,7 +62,7 @@ public class OpenWeatherService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                     Translator.translateMessage(Messages.ERROR_FAILED_TO_FETCH_API_DATA));
         }
-        return this.openWeatherCityConverter.groupForecastsByDate(forecastDTO);
+        return OpenWeatherCityConverter.groupForecastsByDate(forecastDTO);
     }
 
     /**
