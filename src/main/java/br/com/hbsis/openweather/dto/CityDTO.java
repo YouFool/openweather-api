@@ -15,12 +15,21 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class CityDTO {
 
+    /**
+     * City identifier.
+     */
     private Long id;
 
+    /**
+     * City name.
+     */
     @NotBlank
     @Size(max = 255)
     private String name;
 
+    /**
+     * City country code.
+     */
     @NotBlank
     @Size(max = 2)
     private String countryCode;

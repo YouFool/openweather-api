@@ -15,16 +15,32 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CityStatsDTO {
 
+    /**
+     * Temperature.
+     */
     @JsonAlias(value = "temp")
     private BigDecimal temperature;
 
-    private Long pressure;
-
-    private Long humidity;
-
+    /**
+     * Minimum temperature.
+     */
     @JsonAlias(value = "temp_min")
     private BigDecimal minimumTemperature;
 
+    /**
+     * Maximum temperature.
+     */
     @JsonAlias(value = "temp_max")
     private BigDecimal maximumTemperature;
+
+    /**
+     * Pressure.
+     */
+    private Long pressure;
+
+    /**
+     * Humidty.
+     */
+    private Long humidity;
+
 }

@@ -24,12 +24,14 @@ public class OpenWeatherCityDTO {
      * Main weather stats.
      */
     @JsonAlias(value = "weather")
+    @JsonProperty(value = "weather")
     private List<CityWeatherDTO> cityWeathers;
 
     /**
      * City stats.
      */
     @JsonAlias(value = "main")
+    @JsonProperty(value = "stats")
     private CityStatsDTO cityStats;
 
     /**
