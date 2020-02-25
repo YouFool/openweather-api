@@ -58,8 +58,8 @@ Você deve possuir o [Java Development Kit 8](http://openjdk.java.net/install/) 
     * É possível alterar a porta da aplicação no arquivo `application.yml`
     * Altere a propriedade da linha 14 no arquivo `application.yml` com o valor da sua *API Key*
     * Após ao inicializar, realize o import do arquivo `city.list.json` contendo todas as cidades do OpenWeather no MongoDB com os seguintes comandos:
-        * `docker cp static/city.list.json mongo:/tmp/city.list.json`
-        * `docker exec -it mongoimport -d test -c city --jsonArray --file /tmp/city.list.json` 
+        * `docker cp src/main/resources/static/city.list.json mongo:/tmp/city.list.json`
+        * `docker exec -it mongo mongoimport -d test -c city --jsonArray --file /tmp/city.list.json` 
 * Importe o arquivo `OpenWeather.postman_collection.json` no seu REST Client favorito
     * Cadastre uma cidade com nome e código do país via `HTTP POST` no endpoint `/city`
     * Use o ID da cidade cadastrada para realizar as seguintes requisições nas APIs `/weather` e `/forecast`

@@ -5,8 +5,8 @@ spring:
     password: sa
   data:
     mongodb:
-      #uri: mongodb://mongo:27017/test
-      uri: mongodb://localhost:27017/test
+      uri: mongodb://mongo:27017/test
+      #uri: mongodb://localhost:27017/test #For local use only
   jpa:
     show-sql: true
 
@@ -16,4 +16,4 @@ server:
 openweather:
   api:
     baseurl: http://api.openweathermap.org/data/2.5
-    key: eb8b1a9405e659b2ffc78f0a520b1a46
+    key: API_KEY
