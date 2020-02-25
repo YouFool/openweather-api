@@ -55,7 +55,7 @@ public class CityServiceTest {
 
         assertThat(result.getName()).isEqualTo(cityName);
         assertThat(result.getCountryCode()).isEqualTo(countryCode);
-        assertThat(result.getOpenWeatherId()).isEqualTo(Long.parseLong(openWeatherCity.getId()));
+        assertThat(result.getOpenWeatherId()).isEqualTo(openWeatherCity.getCityId().toString());
     }
 
     @Test
